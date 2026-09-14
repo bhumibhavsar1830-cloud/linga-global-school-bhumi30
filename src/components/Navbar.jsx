@@ -8,6 +8,7 @@ const LINKS = [
   { label: 'Academics', to: '/academics' },
   { label: 'Infrastructure', to: '/infrastructure' },
   { label: 'Gallery', to: '/gallery' },
+  { label: 'Announcements', to: '/announcements' },
   { label: 'Transport', to: '/transport' },
   { label: 'Achievements', to: '/achievements' },
   { label: 'Mandatory Disclosure', to: '/mandatory-disclosure' },

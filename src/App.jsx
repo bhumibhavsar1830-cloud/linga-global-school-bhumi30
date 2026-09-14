@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 
-
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
@@ -10,6 +9,7 @@ import Admissions from './pages/Admissions'
 import Academics from './pages/Academics'
 import Infrastructure from './pages/Infrastructure'
 import Gallery from './pages/Gallery'
+import Announcement from './pages/Announcement'
 import Transport from './pages/Transport'
 import Achievements from './pages/Achievements'
 import MandatoryDisclosure from './pages/MandatoryDisclosure'
@@ -39,13 +39,18 @@ function AppContent() {
           <Route path="/admissions" element={<Admissions />} />
           <Route path="/academics" element={<Academics />} />
           <Route path="/infrastructure" element={<Infrastructure />} />
+
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/announcements" element={<Announcement />} />
+
           <Route path="/transport" element={<Transport />} />
           <Route path="/achievements" element={<Achievements />} />
+
           <Route
             path="/mandatory-disclosure"
             element={<MandatoryDisclosure />}
           />
+
           <Route path="/contact" element={<Contact />} />
           <Route path="/enquiry" element={<Enquiry />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
