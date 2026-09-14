@@ -227,48 +227,64 @@
     const SUPABASE_ANON_KEY =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZoZXV6c2FtcGFicnp2a29nb2RjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMwNzk1MTUsImV4cCI6MjA5ODY1NTUxNX0.RQKsj983dtIuAWoFvC_ZE2EnadaQ8_J-d8-TWoFnYZc";
 
-    const supabase = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const loginBtn =
+      document.getElementById("loginBtn");
+
+    const message =
+      document.getElementById("message");
+
+    loginForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim();
+
+        const password =
+          document
+            .getElementById("password")
+            .value;
+
+        message.textContent = "";
+
+        loginBtn.disabled = true;
+        loginBtn.textContent = "Logging in...";
+
+        const { error } =
+          await supabaseClient.auth.signInWithPassword({
+            email,
+            password,
+          });
+
+        if (error) {
+
+          message.textContent =
+            error.message;
+
+          loginBtn.disabled = false;
+          loginBtn.textContent = "Login";
+
+          return;
+        }
+
+        window.location.href =
+          "/admin-upload.html";
+      }
     );
-
-    const loginForm = document.getElementById("loginForm");
-    const loginBtn = document.getElementById("loginBtn");
-    const message = document.getElementById("message");
-
-    loginForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      const email = document
-        .getElementById("email")
-        .value
-        .trim();
-
-      const password = document
-        .getElementById("password")
-        .value;
-
-      message.textContent = "";
-      loginBtn.disabled = true;
-      loginBtn.textContent = "Logging in...";
-
-      const { data, error } =
-        await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-
-      if (error) {
-        message.textContent = error.message;
-        loginBtn.disabled = false;
-        loginBtn.textContent = "Login";
-        return;
-      }
-
-      if (data.session) {
-        window.location.href = "/admin-upload.html";
-      }
-    });
   </script>
 
 </body>
